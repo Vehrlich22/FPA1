@@ -313,7 +313,7 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
                 string.append(line);
             }
             buff.close();
-            int counts[] = getLetterCounts(string.toString());
+            int counts[] = getCalibrationLetterCounts(string.toString());
             for (int i = 0; i < 26; i++) {
                 mappingTable.setValueAt(counts[i], 0, i+1);
             }
@@ -476,6 +476,23 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
             }   
         }
         ciphertextErrorText.setText("");
+        return counts;
+    }
+    
+    private int[] getCalibrationLetterCounts(String text) {
+        int counts[] = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        
+        char cipherText[] = text.toCharArray();
+        
+        for (int i = 0; i < cipherText.length; i++) {
+            int pos = (int)(cipherText[i] - 65);
+            if (pos >= 32 && pos < 58) {
+                counts[pos-32]++;
+            }else if (pos >= 0 && pos < 26){
+                counts[pos]++;
+            }   
+        }
         return counts;
     }
 }
