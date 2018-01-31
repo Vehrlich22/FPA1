@@ -397,8 +397,10 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
             
             private void update() {
                 int counts[] = getLetterCounts(ciphertext.getText());
-                for (int i = 0; i < 26; i++) {
-                    mappingTable.setValueAt(counts[i], 1, i+1);
+                if (counts != null) {
+                    for (int i = 0; i < 26; i++) {
+                        mappingTable.setValueAt(counts[i], 1, i+1);
+                    }
                 }
             }
         });
@@ -439,12 +441,15 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         
         for (int i = 0; i < cipherText.length; i++) {
             int pos = (int)(cipherText[i] - 65);
-            if (pos > 26) {
+            if (pos > 32 && pos < 58) {
                 ciphertextErrorText.setText("Ciphertext should be in all caps");
-                return new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-            }
-            counts[pos]++;
+                return null;
+            } else if ((pos < 0 && pos != -55 && pos != -33 && pos != -56) || (pos > 25 && pos <= 32)) {
+                ciphertextErrorText.setText("Ciphertext should not have special characters");
+                return null;
+            } else if (pos >= 0 && pos < 26){
+                counts[pos]++;
+            }   
         }
         ciphertextErrorText.setText("");
         return counts;
