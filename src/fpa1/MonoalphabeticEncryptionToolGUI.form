@@ -123,27 +123,22 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="mappingPane" alignment="0" pref="867" max="32767" attributes="0"/>
+                  <Component id="mappingPane" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="plaintextLabel" min="-2" pref="525" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="plaintextLabel" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="ciphertextLabel" linkSize="1" min="-2" pref="227" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="plaintextScrollPane" linkSize="1" min="-2" pref="420" max="-2" attributes="0"/>
-                                  <Component id="plaintextErrorText" alignment="0" min="-2" pref="420" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ciphertextErrorText" alignment="0" min="-2" pref="420" max="-2" attributes="0"/>
-                                  <Component id="ciphertextScrollPane" linkSize="1" min="-2" pref="420" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="ciphertextLabel" max="32767" attributes="0"/>
+                          <Component id="ciphertextScrollPane" linkSize="7" min="-2" pref="525" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="plaintextErrorText" max="32767" attributes="0"/>
+                          <Component id="plaintextScrollPane" linkSize="7" pref="518" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ciphertextErrorText" min="-2" pref="525" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -156,18 +151,18 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="mappingPane" min="-2" pref="79" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="plaintextLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="ciphertextLabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="plaintextLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ciphertextLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="plaintextScrollPane" linkSize="6" min="-2" pref="170" max="-2" attributes="0"/>
-                  <Component id="ciphertextScrollPane" linkSize="6" min="-2" pref="170" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="plaintextScrollPane" linkSize="8" pref="332" max="32767" attributes="0"/>
+                  <Component id="ciphertextScrollPane" linkSize="8" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="plaintextErrorText" pref="20" max="32767" attributes="0"/>
+                  <Component id="plaintextErrorText" pref="29" max="32767" attributes="0"/>
                   <Component id="ciphertextErrorText" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -201,9 +196,10 @@
               </Border>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="27" rowCount="2">
+              <Table columnCount="27" rowCount="3">
                 <Column editable="false" title=" " type="java.lang.Object">
-                  <Data value="#"/>
+                  <Data value="Calibration #"/>
+                  <Data value="Ciphertext #"/>
                   <Data value="Key"/>
                 </Column>
                 <Column editable="true" title="A" type="java.lang.Short"/>
@@ -419,6 +415,7 @@
         <Component class="javax.swing.JTextArea" name="ciphertext">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="toolTipText" type="java.lang.String" value="Place ciphertext for decryption here"/>
           </Properties>
