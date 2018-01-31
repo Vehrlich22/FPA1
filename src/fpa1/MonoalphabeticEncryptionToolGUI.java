@@ -7,6 +7,12 @@ package fpa1;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 /**
  *
@@ -43,8 +49,8 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         ciphertextErrorText = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuBarFile = new javax.swing.JMenu();
-        menuBarOpenText = new javax.swing.JMenuItem();
-        menuBarSave = new javax.swing.JMenuItem();
+        menuBarOpenCipherText = new javax.swing.JMenuItem();
+        menuBarCalibrate = new javax.swing.JMenuItem();
         menuBarClose = new javax.swing.JMenuItem();
         MenuBarTools = new javax.swing.JMenu();
         menuBarEncryptWithKey = new javax.swing.JMenuItem();
@@ -145,23 +151,23 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
 
         menuBarFile.setText("File");
 
-        menuBarOpenText.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        menuBarOpenText.setText("Open Text");
-        menuBarOpenText.addActionListener(new java.awt.event.ActionListener() {
+        menuBarOpenCipherText.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        menuBarOpenCipherText.setText("Open Ciphertext");
+        menuBarOpenCipherText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBarOpenTextActionPerformed(evt);
+                menuBarOpenCipherTextActionPerformed(evt);
             }
         });
-        menuBarFile.add(menuBarOpenText);
+        menuBarFile.add(menuBarOpenCipherText);
 
-        menuBarSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        menuBarSave.setText("Save");
-        menuBarSave.addActionListener(new java.awt.event.ActionListener() {
+        menuBarCalibrate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_QUOTE, java.awt.event.InputEvent.CTRL_MASK));
+        menuBarCalibrate.setText("Calibrate");
+        menuBarCalibrate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBarSaveActionPerformed(evt);
+                menuBarCalibrateActionPerformed(evt);
             }
         });
-        menuBarFile.add(menuBarSave);
+        menuBarFile.add(menuBarCalibrate);
 
         menuBarClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menuBarClose.setText("Close");
@@ -265,13 +271,32 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuBarOpenTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarOpenTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuBarOpenTextActionPerformed
+    private void menuBarOpenCipherTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarOpenCipherTextActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+        fileChooser.setFileFilter(filter);
+        fileChooser.showOpenDialog(null);
+        File cipherText = fileChooser.getSelectedFile();
+        String filename = cipherText.getAbsolutePath();
+        
+        try{
+            FileReader reader = new FileReader(filename);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            ciphertext.read(bufferedReader, null);
+            bufferedReader.close();
+            int counts[] = getLetterCounts(ciphertext.getText());
+            for (int i = 0; i < 26; i++) {
+                mappingTable.setValueAt(counts[i], 1, i+1);
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_menuBarOpenCipherTextActionPerformed
 
-    private void menuBarSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarSaveActionPerformed
+    private void menuBarCalibrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarCalibrateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuBarSaveActionPerformed
+    }//GEN-LAST:event_menuBarCalibrateActionPerformed
 
     private void menuBarCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarCloseActionPerformed
         System.exit(0);
@@ -339,11 +364,11 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuBarAutoDecrypt;
     private javax.swing.JMenuItem menuBarAutoEncrypt;
+    private javax.swing.JMenuItem menuBarCalibrate;
     private javax.swing.JMenuItem menuBarClose;
     private javax.swing.JMenuItem menuBarEncryptWithKey;
     private javax.swing.JMenu menuBarFile;
-    private javax.swing.JMenuItem menuBarOpenText;
-    private javax.swing.JMenuItem menuBarSave;
+    private javax.swing.JMenuItem menuBarOpenCipherText;
     private javax.swing.JTextArea plaintext;
     private javax.swing.JLabel plaintextErrorText;
     private javax.swing.JLabel plaintextLabel;
