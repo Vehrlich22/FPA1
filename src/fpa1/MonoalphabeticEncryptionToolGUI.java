@@ -139,6 +139,7 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         ciphertextLabel.setText("Ciphertext");
 
         plaintext.setColumns(20);
+        plaintext.setLineWrap(true);
         plaintext.setRows(5);
         plaintext.setToolTipText("Place plaintext for encryption here");
         plaintextScrollPane.setViewportView(plaintext);
