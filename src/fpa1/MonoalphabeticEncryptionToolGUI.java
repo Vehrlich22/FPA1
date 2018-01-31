@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package foundationspa1;
+package fpa1;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -54,6 +54,7 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 300));
         setResizable(false);
+        setSize(new java.awt.Dimension(820, 300));
 
         mappingPane.setBorder(null);
         mappingPane.setForeground(new java.awt.Color(51, 51, 55));
@@ -90,9 +91,9 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
         mappingPane.setViewportView(mappingTable);
         mappingTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (mappingTable.getColumnModel().getColumnCount() > 0) {
-            mappingTable.getColumnModel().getColumn(0).setMinWidth(35);
-            mappingTable.getColumnModel().getColumn(0).setPreferredWidth(35);
-            mappingTable.getColumnModel().getColumn(0).setMaxWidth(35);
+            mappingTable.getColumnModel().getColumn(0).setMinWidth(75);
+            mappingTable.getColumnModel().getColumn(0).setPreferredWidth(75);
+            mappingTable.getColumnModel().getColumn(0).setMaxWidth(75);
             mappingTable.getColumnModel().getColumn(1).setResizable(false);
             mappingTable.getColumnModel().getColumn(2).setResizable(false);
             mappingTable.getColumnModel().getColumn(3).setResizable(false);
@@ -218,7 +219,7 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mappingPane, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                    .addComponent(mappingPane, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -243,7 +244,7 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mappingPane, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mappingPane, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(plaintextLabel)
@@ -253,10 +254,10 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
                     .addComponent(plaintextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ciphertextScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ciphertextErrorText)
-                    .addComponent(plaintextErrorText))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(plaintextErrorText, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(ciphertextErrorText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ciphertextScrollPane, plaintextScrollPane});
@@ -368,19 +369,17 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
             }
             
             private void update() {
-                int counts[] = getLetterCounts();
+                int counts[] = getLetterCounts(ciphertext.getText());
                 for (int i = 0; i < 26; i++) {
-                    mappingTable.setValueAt(counts[i], 0, i+1);
+                    mappingTable.setValueAt(counts[i], 1, i+1);
                 }
             }
         });
     }
     
-    private int[] getLetterCounts() {
+    private int[] getLetterCounts(String text) {
         int counts[] = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        
-        String text = ciphertext.getText();
         
         char cipherText[] = text.toCharArray();
         
