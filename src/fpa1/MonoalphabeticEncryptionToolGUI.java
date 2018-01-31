@@ -295,7 +295,31 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuBarOpenCipherTextActionPerformed
 
     private void menuBarCalibrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarCalibrateActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+        fileChooser.setFileFilter(filter);
+        fileChooser.showOpenDialog(null);
+        File calibrationText = fileChooser.getSelectedFile();
+        String filename = calibrationText.getAbsolutePath();
+        
+        try {
+            FileReader reader = new FileReader(filename);
+            BufferedReader buff = new BufferedReader(reader);
+            StringBuilder string = new StringBuilder();
+            String line = null;
+            while((line = buff.readLine()) != null){
+                string.append(line);
+            }
+            buff.close();
+            int counts[] = getLetterCounts(string.toString());
+            for (int i = 0; i < 26; i++) {
+                mappingTable.setValueAt(counts[i], 0, i+1);
+            }
+        }
+        
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_menuBarCalibrateActionPerformed
 
     private void menuBarCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarCloseActionPerformed
