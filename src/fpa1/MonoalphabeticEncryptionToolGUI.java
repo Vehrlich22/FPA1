@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 /**
  *
@@ -397,6 +399,28 @@ public class MonoalphabeticEncryptionToolGUI extends javax.swing.JFrame {
                 int counts[] = getLetterCounts(ciphertext.getText());
                 for (int i = 0; i < 26; i++) {
                     mappingTable.setValueAt(counts[i], 1, i+1);
+                }
+            }
+        });
+        mappingTable.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (!ciphertext.getText().equals("") && ciphertext.getText() != null) {
+                    Object value = mappingTable.getValueAt(2, e.getColumn());
+                    if (value != null && value.toString().length() > 1) {
+                        ciphertextErrorText.setText("Only use key values of a single character!");
+                        return;
+                    } else {
+                        ciphertextErrorText.setText("");
+                    }
+                    String cipher = ciphertext.getText();
+                    for (int i = 0; i < 26; i++ ) {
+                        Object element = mappingTable.getValueAt(2, i + 1);
+                        if (element != null && element.toString().length() > 0) {
+                            cipher = cipher.replace(LetterMap.CIPHERTEXT_MAP[i], element.toString().charAt(0));
+                        }
+                    }
+                    plaintext.setText(cipher);
                 }
             }
         });
